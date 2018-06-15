@@ -14,13 +14,12 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const _state = this.auth.authState.pipe(
+    return this.auth.authState.pipe(
       map((user: any) => {
+        user === null ? this.router.navigate(['/']) : 0;
         return user !== null;
       })
     );
-
-    return _state;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -39,13 +38,12 @@ export class EntryGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const _state = this.auth.authState.pipe(
+    return this.auth.authState.pipe(
       map((user: any) => {
+        user === null ? 0 : this.router.navigate(['/', 'l']);
         return user === null;
       })
     );
-
-    return _state;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

@@ -17,10 +17,10 @@
 
             <span class="fill-all"></span>
 
-            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'account']">ACCOUNT</button>
-            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'dashboard']">TRANSACTIONS</button>
-            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'help']">HELP</button>
-            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'preferences']">PREFERENCES</button>
+            <button mat-flat-button *ngIf="isAuthenticated && isNavigated" [routerLink]="['/', 'l', 'account']">ACCOUNT</button>
+            <button mat-flat-button *ngIf="isAuthenticated && isNavigated" [routerLink]="['/', 'l', 'dashboard']">TRANSACTIONS</button>
+            <button mat-flat-button *ngIf="isAuthenticated && isNavigated" [routerLink]="['/', 'l', 'help']">HELP</button>
+            <button mat-flat-button *ngIf="isAuthenticated && isNavigated" [routerLink]="['/', 'l', 'preferences']">PREFERENCES</button>
             <button mat-flat-button *ngIf="!isAuthenticated" routerLink="/">SIGN IN</button>
             <button mat-flat-button *ngIf="!isAuthenticated" [routerLink]="['/', 'registration']">REGISTER</button>
 

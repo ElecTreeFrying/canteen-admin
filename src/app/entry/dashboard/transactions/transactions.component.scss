@@ -1,6 +1,13 @@
 #header-button {
-  float: right;
   margin-top: 15px;
+
+  .mat-icon-button {
+    float: left;
+  }
+
+  .mat-raised-button {
+    float: right;
+  }
 }
 
 .mat-form-field {
