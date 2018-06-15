@@ -1,11 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # preferences
-src/environments
+src/environments1
 mobile/platforms/**
 mobile/res/**
 mobile/plugins/**
-mobile/www/**
 
 # compiled output
 /dist
