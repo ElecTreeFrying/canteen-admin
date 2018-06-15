@@ -1,0 +1,26 @@
+#wrapper {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .mat-card {
+    width: 400px;
+    margin: auto;
+    margin-top: 200px;
+    padding-bottom: 0;
+
+    #header {
+      margin-bottom: 30px;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-raised-button {
+      float: right;
+      margin-bottom: 15px;
+    }
+  }
+}

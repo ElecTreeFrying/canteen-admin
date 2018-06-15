@@ -1,0 +1,40 @@
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav>
+    asd
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div id="toolbar">
+      <mat-toolbar id="main-toolbar" color="primary">
+
+        <div class="wrap">
+          <mat-toolbar id="sub-toolbar" color="primary">
+
+            <span *ngIf="isAuthenticated" [routerLink]="['/', 'l']">Logger Dashboard</span>
+            <span *ngIf="!isAuthenticated" routerLink="/">Logger Dashboard</span>
+
+            <span class="fill-all"></span>
+
+            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'account']">ACCOUNT</button>
+            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'dashboard']">TRANSACTIONS</button>
+            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'help']">HELP</button>
+            <button mat-flat-button *ngIf="isAuthenticated" [routerLink]="['/', 'l', 'preferences']">PREFERENCES</button>
+            <button mat-flat-button *ngIf="!isAuthenticated" routerLink="/">SIGN IN</button>
+            <button mat-flat-button *ngIf="!isAuthenticated" [routerLink]="['/', 'registration']">REGISTER</button>
+
+          </mat-toolbar>
+        </div>
+
+      </mat-toolbar>
+    </div>
+
+    <div class="wrap" id="wrap">
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

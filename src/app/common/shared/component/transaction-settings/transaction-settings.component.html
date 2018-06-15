@@ -1,0 +1,55 @@
+<div id="wrapper">
+  <mat-expansion-panel [hideToggle]="true" (click)="expansionPanel.open()" #expansionPanel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>settings</mat-icon>
+        Settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+
+      <mat-accordion [displayMode]="'default'" [multi]="true">
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Add beverage</mat-panel-title>
+            <mat-panel-description>Add beverage product</mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+
+            <div class="row">
+              <div class="col d-flex">
+                <div class="mx-auto">
+                  <h2 class="text-center">IM Viewer</h2>
+                  <h4 class="text-center">< expansion ></h4>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Update beverage</mat-panel-title>
+            <mat-panel-description>Update beverage selling price</mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+
+            <div class="row">
+              <div class="col d-flex">
+                <div class="mx-auto">
+                  <h2 class="text-center">IM Viewer</h2>
+                  <h4 class="text-center">< expansion ></h4>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </ng-template>
+  </mat-expansion-panel>
+</div>
