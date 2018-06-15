@@ -2,6 +2,10 @@
 
 # preferences
 src/environments
+mobile/platforms/**
+mobile/res/**
+mobile/plugins/**
+mobile/www/**
 
 # compiled output
 /dist
