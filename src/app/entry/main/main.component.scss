@@ -1,0 +1,45 @@
+$square: 240px;
+
+.wrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-top: 15px + 150px;
+
+  .mat-card {
+    height: $square;
+    width: $square;
+
+    .mat-card-content {
+      height: 192px;
+
+      p {
+        text-align: center;
+        font-size: 24px;
+        margin-top: 12px;
+      }
+
+      > div:nth-child(2) {
+        display: flex;
+
+        .mat-icon {
+          margin: auto;
+          width: 104px;
+          height: 104px;
+          font-size: 7em;
+        }
+      }
+
+      > div:nth-child(3) {
+        display: flex;
+        height: 39px;
+
+        .mat-icon-button {
+          margin: auto;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

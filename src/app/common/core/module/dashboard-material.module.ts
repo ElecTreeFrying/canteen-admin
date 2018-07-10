@@ -1,15 +1,35 @@
 import { NgModule } from '@angular/core';
 import {
-  MatCardModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatIconModule,
   MatButtonModule,
-  MatIconModule
+  MatDialogModule,
+  MatExpansionModule,
+  MatCheckboxModule,
+  MatAutocompleteModule,
+  MatTooltipModule,
+  MatRadioModule
 } from '@angular/material';
 
 @NgModule({
   exports: [
-    MatCardModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
     MatButtonModule,
-    MatIconModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatTooltipModule,
+    MatRadioModule
   ]
 })
 export class DashboardMaterialModule { }

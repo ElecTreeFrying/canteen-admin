@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class DatabaseService {
 
-  constructor(private database: AngularFireDatabase) { }
+  ref: AngularFireList<any>;
 
-  push(path: string, data: any) {
+  constructor(private db: AngularFireDatabase) { }
 
-    this.database.list<any>(path).push(data);
+  createDocument(path: string, data: any) {
+    return this.db.list<any>(path).push(data);
+  }
 
+  readDocument(path: string) {
+    return this.db.list<any>(path).valueChanges();
   }
 
 }

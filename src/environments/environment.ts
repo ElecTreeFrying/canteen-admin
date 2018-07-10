@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyAqXQSMC8yWan1xYqkG75jidyUl4He2aY4",
-    authDomain: "mapua-canteen.firebaseapp.com",
-    databaseURL: "https://mapua-canteen.firebaseio.com",
-    projectId: "mapua-canteen",
-    storageBucket: "mapua-canteen.appspot.com",
-    messagingSenderId: "61470957872"
+    apiKey: "AIzaSyB6gNiBfwzrptKROyB13_s2TpWFyc5BGIM",
+    authDomain: "mu-canteen-admin.firebaseapp.com",
+    databaseURL: "https://mu-canteen-admin.firebaseio.com",
+    projectId: "mu-canteen-admin",
+    storageBucket: "mu-canteen-admin.appspot.com",
+    messagingSenderId: "859503932406"
   }
 };
 

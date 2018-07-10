@@ -13,14 +13,14 @@ import { DatabaseService } from './database.service';
 export class FirestoreService {
 
   usersCollection: AngularFirestoreCollection<any>;
-  prodcurListCollection: AngularFirestoreCollection<any>;
+  productListCollection: AngularFirestoreCollection<any>;
 
   constructor(
     private firestore: AngularFirestore,
     private database: DatabaseService
   ) {
     this.usersCollection = firestore.collection<any>('users');
-    this.prodcurListCollection = firestore.collection<any>('product-list');
+    this.productListCollection = firestore.collection<any>('product-list');
   }
 
   enableNetwork() {
@@ -31,9 +31,12 @@ export class FirestoreService {
     this.firestore.firestore.disableNetwork();
   }
 
-  addNewCollection(path: string, data: any): void {
+  addDocumentToCollection(path: string, data: any): void {
     this.firestore.collection<any>(path).add(data);
-    this.database.push(path, data);
+  }
+
+  addDocumentToCollectionInRtdb(path: string, data: any): void {
+    this.database.createDocument(path, data);
   }
 
   readCollectionValueChanges(path: string): Observable<any[]> {
@@ -44,8 +47,21 @@ export class FirestoreService {
     return this.firestore.collection<any>(path).snapshotChanges();
   }
 
+  mapChanges() {
+    return this.productListCollection.snapshotChanges().pipe(
+      map((values: DocumentChangeAction<any>[]) => {
+        return values.map((value: DocumentChangeAction<any>) => {
+
+          // codde here
+
+          return value.payload.doc.data();
+        })
+      })
+    )
+  }
+
   readProductList() {
-    return this.prodcurListCollection.snapshotChanges().pipe(
+    return this.productListCollection.snapshotChanges().pipe(
       map((value: DocumentChangeAction<any>[], index: number) => {
         const array = value.map((_value: DocumentChangeAction<any>) => {
           const ref = <QueryDocumentSnapshot<any>>_value.payload.doc;

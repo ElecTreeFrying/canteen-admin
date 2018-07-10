@@ -1,29 +1,3 @@
-.mat-sidenav-container {
-  .mat-sidenav {
-    width: 300px;
-  }
-
-  #toolbar {
-    position: fixed;
-    z-index: 1000;
-
-    #main-toolbar {
-      position: relative;
-      width: 100vw;
-    }
-
-    #sub-toolbar {
-      padding: 0;
-
-      .mat-raised-button {
-        float: right;
-      }
-    }
-  }
-
-  #wrap {
-    height: 100vh;
-    padding-top: 64px + 15px;
-    padding-bottom: 30px;
-  }
+.wrap > .mat-toolbar {
+  padding: 0;
 }

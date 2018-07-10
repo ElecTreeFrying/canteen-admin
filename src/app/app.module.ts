@@ -1,17 +1,32 @@
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Component } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppProviderModule } from './app-provider.module';
+import { AppProviderModule  } from './app-provider.module';
 
-import { AppComponent } from './app.component';
+import { StartupComponent } from './common/shared/component/startup/startup.component';
 
+const routes: Routes = [
+  { path: '', component: StartupComponent, canActivate: [  ] },
+  { path: 'a', loadChildren: './entry/entry.module#EntryModule', canActivate: [  ] }
+];
+
+@Component({
+  selector: 'app-root',
+  template: '<router-outlet></router-outlet>'
+})
+export class AppComponent { }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StartupComponent
   ],
   imports: [
-    AppRoutingModule,
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
     AppProviderModule
   ],
   bootstrap: [

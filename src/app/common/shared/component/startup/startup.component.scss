@@ -1,0 +1,22 @@
+#wrapper {
+  display: flex;
+  height: 100vh;
+
+  .mat-card {
+    margin: auto;
+    width: 350px;
+    transform: translateY(-20%);
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-raised-button {
+      float: right;
+    }
+  }
+}

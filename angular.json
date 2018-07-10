@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "canteen": {
+    "canteen-admin": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -36,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/canteen",
+            "outputPath": "dist/canteen-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "canteen:build"
+            "browserTarget": "canteen-admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "canteen:build:production"
+              "browserTarget": "canteen-admin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "canteen:build"
+            "browserTarget": "canteen-admin:build"
           }
         },
         "test": {
@@ -118,7 +118,7 @@
         }
       }
     },
-    "canteen-e2e": {
+    "canteen-admin-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -126,11 +126,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "canteen:serve"
+            "devServerTarget": "canteen-admin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "canteen:serve:production"
+              "devServerTarget": "canteen-admin:serve:production"
             }
           }
         },
@@ -146,5 +146,5 @@
       }
     }
   },
-  "defaultProject": "canteen"
+  "defaultProject": "canteen-admin"
 }

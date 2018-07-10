@@ -1,34 +1,37 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { EntryRoutingModule } from './entry-routing.module';
 import { EntryMaterialModule } from '../common/core/module/entry-material.module';
 
-import { EntryComponent } from './entry.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { MainComponent } from './main/main.component';
 
-import { EntryService } from './entry.service';
-import { NoticeService } from '../common/core/service/notice.service';
+@Component({
+  selector: 'app-entry',
+  templateUrl: 'entry.component.html',
+  styleUrls: [ 'entry.component.scss' ]
+})
+export class EntryComponent { }
 
-import { DashboardGuard } from '../common/shared/guard/guard';
-
+const routes: Routes = [
+  { path: '', component: EntryComponent, children: [
+    { path: '', component: MainComponent },
+    { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+    { path: 'account', loadChildren: './account-details/account-details.module#AccountDetailsModule' },
+    { path: 'preference', loadChildren: './preferences/preferences.module#PreferencesModule' },
+    { path: 'help', loadChildren: './help/help.module#HelpModule' }
+  ] }
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    EntryRoutingModule,
+    RouterModule.forChild(routes),
     EntryMaterialModule
   ],
   declarations: [
     EntryComponent,
-    LandingPageComponent,
-  ],
-  providers: [
-    EntryService,
-    NoticeService,
-    DashboardGuard
+    MainComponent
   ]
 })
 export class EntryModule { }

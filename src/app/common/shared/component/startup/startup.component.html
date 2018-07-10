@@ -1,0 +1,27 @@
+<div id="wrapper">
+
+  <mat-card>
+    <mat-card-content>
+
+      <h1>Sign in</h1>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <button mat-raised-button routerLink="/a">LOGIN</button>
+
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

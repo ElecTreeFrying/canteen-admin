@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   color: antiquewhite;
   font-family: 'Roboto', sans-serif;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(48, 48, 48);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5, h6 {
 
 *:focus, button:focus {
   outline: none;
+}
+
+label.mat-checkbox-layout {
+  margin-bottom: 1px;
 }
 
 .wrap {
@@ -45,6 +49,6 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 1200px) {
   .wrap {
-    max-width: 1190px;
+    max-width: 1140px;
   }
 }
