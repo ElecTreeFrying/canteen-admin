@@ -1,5 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DOCUMENT } from '@angular/platform-browser';
+import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../../core/service/auth.service';
+import { FirestoreService } from '../../../core/service/firestore.service';
 
 @Component({
   selector: 'app-startup',
@@ -9,19 +14,46 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class StartupComponent implements OnInit {
 
   form: FormGroup;
+  isProgressing: boolean = false;
 
-  constructor(@Inject(FormBuilder) public fb: FormBuilder) {
+  constructor(
+    @Inject(FormBuilder) public fb: FormBuilder,
+    @Inject(DOCUMENT) private document: any,
+    private router: Router,
+    private auth: AuthService,
+    private firestore: FirestoreService
+  ) {
     this.form = fb.group({
-      'email': [ '' ],
-      'password': [ '' ]
+      'email': [ '', [ Validators.required, Validators.email ] ],
+      'password': [ '', [ Validators.required, Validators.minLength(2) ] ]
     })
   }
 
   ngOnInit() {
   }
 
+  get emailError(): ValidationErrors { return this.form.get('email').errors; }
+  get passwordError(): ValidationErrors { return this.form.get('password').errors; }
+
   onSubmit() {
-    console.log(this.form.value);
-  }
+    this.isProgressing = true;
+
+    if (this.form.invalid) {
+      this.isProgressing = false;
+      // this.notice.formError();
+      return;
+    }
+
+    this.auth.signIn(this.form.value)
+      .then(() => {
+        this.isProgressing = false;
+        // this.notice.signInSuccess();
+        this.firestore.enableNetwork();
+        this.router.navigate(['/', 'a']);
+      }).catch((state) => {
+        this.isProgressing = false;
+        // this.notice.signInError(state);
+      });
+    }
 
 }

@@ -1,0 +1,50 @@
+#divider {
+  margin: 16px 0;
+}
+
+#wrapper {
+  width: 425px;
+  margin-top: 16px;
+  display: flex;
+
+  div {
+    flex-grow: 1;
+    margin: 0 5px;
+
+    .light {
+      color: #b3b3b3;
+      margin: 0;
+      font-size: 12px;
+    }
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  form > div {
+    display: flex;
+    margin: 0;
+    width: auto;
+
+    .mat-form-field {
+      width: 99%;
+    }
+
+    > div:first-child {
+      margin: 0;
+    }
+
+    > div:last-child {
+      margin: 0;
+    }
+  }
+}
+
+#buttons {
+  display: flex;
+
+  > .mat-raised-button {
+    margin-left: auto;
+  }
+}

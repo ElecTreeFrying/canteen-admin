@@ -8,7 +8,9 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { FirestoreService } from '../../common/core/service/firestore.service';
 import { DatabaseService } from '../../common/core/service/database.service';
 
-import { TransactionSettingsComponent } from '../../common/shared/component/transaction-settings/transaction-settings.component';
+import { ProductUpdateComponent } from '../../common/shared/component/product-update/product-update.component';
+import { ProductRemoveComponent } from '../../common/shared/component/product-remove/product-remove.component';
+import { ProductAddComponent } from '../../common/shared/component/product-add/product-add.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +23,11 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: ProductDataSource | MatTableDataSource<any>;
-  dialogRef: MatDialogRef<TransactionSettingsComponent>;
   selection = new SelectionModel<any>(true, []);
+  selectedRow: any = null;
+  isDisabled: boolean = true;
 
-  displayedColumns = ['select', 'id', 'beverageName', 'code', 'beginning', 'delivery', 'waste', 'total', 'ending', 'sold', 'sellingPrice', 'amount'];
+  displayedColumns = ['select', 'beverageName', 'code', 'beginning', 'delivery', 'waste', 'total', 'ending', 'sold', 'sellingPrice', 'amount'];
   firestoreData: any[];
 
   constructor(
@@ -41,17 +44,26 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {this.openSettings()});
   }
 
   onSelectRow(selected: any) {
     this.dataSource.data.forEach(row => {
 
       selected.beverageName === row.beverageName
-        ? !<boolean>this.selection.isSelected(row) ? console.log(row)
-        : 0 : this.selection.deselect(row);
+        ? !<boolean>this.selection.isSelected(row) ? this.selected(row)
+        : this.deselect(row) : this.selection.deselect(row);
 
     });
+  }
+
+  selected(row: any) {
+    this.selectedRow = row;
+    this.isDisabled = false;
+  }
+
+  deselect(row: any) {
+    this.selectedRow = null;
+    this.isDisabled = true;
   }
 
   applyFilter(filterValue: string) {
@@ -67,10 +79,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  openSettings() {
-    this.dialogRef = this.dialog.open(TransactionSettingsComponent, {
-      closeOnNavigation: true,
-    })
+  openUpdate() {
+    this.dialog.open(ProductUpdateComponent, { data: this.selectedRow })
+  }
+
+  openRemove() {
+    this.dialog.open(ProductRemoveComponent, { data: this.selectedRow })
+  }
+
+  openAdd() {
+    this.dialog.open(ProductAddComponent)
   }
 
 }

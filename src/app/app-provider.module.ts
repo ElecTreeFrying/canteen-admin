@@ -8,7 +8,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppMaterialModule } from './common/core/module/app-material.module';
 
 import { SharedService } from './common/core/service/shared.service';
-import { EntryGuard, ExitGuard } from './common/core/service/route-guard.service';
 
 import { environment } from '../environments/environment';
 
@@ -24,9 +23,7 @@ import { environment } from '../environments/environment';
     AppMaterialModule
   ],
   providers: [
-    SharedService,
-    EntryGuard,
-    ExitGuard
+    SharedService
   ]
 })
 export class AppProviderModule { }

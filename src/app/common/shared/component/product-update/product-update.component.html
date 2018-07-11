@@ -1,0 +1,63 @@
+<h4>Update beverage</h4>
+<div id="divider">
+  <mat-divider></mat-divider>
+</div>
+<div id="wrapper">
+  <form [formGroup]="form">
+
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Beverage group</mat-label>
+      <input matInput type="text" autocomplete="off" formControlName="beverageGroup">
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Beverage name</mat-label>
+      <input matInput type="text" autocomplete="off" formControlName="beverageName">
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Selling price</mat-label>
+      <input matInput type="number" autocomplete="off" formControlName="sellingPrice">
+    </mat-form-field>
+
+    <div>
+      <div>
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Beginning</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="beginning">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Delivery</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="delivery">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Waste</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="waste">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Total</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="total">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Ending</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="ending">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Sold</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="sold">
+        </mat-form-field>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div id="buttons">
+  <button mat-raised-button color="accent" (click)="onUpdate()">UPDATE</button>
+</div>

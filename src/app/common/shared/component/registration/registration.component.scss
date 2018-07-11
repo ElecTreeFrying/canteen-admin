@@ -1,0 +1,30 @@
+#wrapper {
+  display: flex;
+  height: 100vh;
+
+  .mat-card {
+    margin: auto;
+    width: 500px;
+    padding-bottom: 0;
+    transform: translateY(-10%);
+
+    #header {
+      margin-bottom: 30px;
+    }
+
+    .mat-form-field {
+      width: 100%;
+      padding: 0 5px;
+    }
+
+    #both {
+      width: 50%;
+    }
+
+    .mat-raised-button {
+      float: right;
+      margin-left: 12.5px;
+      margin-bottom: 15px;
+    }
+  }
+}

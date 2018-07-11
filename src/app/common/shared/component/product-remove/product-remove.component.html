@@ -1,0 +1,19 @@
+<p>Are you sure you want to remove selected beverage?</p>
+
+<mat-divider></mat-divider>
+
+<div id="wrapper">
+  <div>
+    <p class="light">Beverage name</p>
+    <p>{{ data.beverageName }}</p>
+  </div>
+  <div>
+    <p class="light">Beverage selling price</p>
+    <p>{{ data.sellingPrice }}</p>
+  </div>
+</div>
+
+<div id="footer">
+  <button mat-raised-button color="accent" (click)="onCancel()">CANCEL</button>
+  <button mat-raised-button color="warn" (click)="onRemove()">REMOVE</button>
+</div>

@@ -1,12 +1,17 @@
 #header-button {
   margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
 
-  .mat-icon-button {
-    float: left;
-  }
+  > div {
+    display: flex;
 
-  .mat-raised-button {
-    float: right;
+    .mat-raised-button {
+      margin-left: 15px;
+    }
+    .mat-icon-button {
+      margin-left: 15px;
+    }
   }
 }
 

@@ -1,0 +1,27 @@
+#wrapper {
+  width: 400px;
+  margin-top: 16px;
+  display: flex;
+
+  div {
+    flex-grow: 1;
+    margin: 0 5px;
+
+    .light {
+      color: #b3b3b3;
+      margin: 0;
+      font-size: 12px;
+    }
+  }
+
+}
+
+#footer {
+  display: flex;
+  justify-content: space-around;
+
+  .mat-raised-button {
+    width: 100%;
+    margin: 0 5px;
+  }
+}

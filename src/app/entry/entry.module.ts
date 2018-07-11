@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { EntryMaterialModule } from '../common/core/module/entry-material.module';
 
+import { AuthService } from '../common/core/service/auth.service';
+
 import { MainComponent } from './main/main.component';
 
 @Component({
@@ -11,7 +13,12 @@ import { MainComponent } from './main/main.component';
   templateUrl: 'entry.component.html',
   styleUrls: [ 'entry.component.scss' ]
 })
-export class EntryComponent { }
+export class EntryComponent {
+  constructor(private auth: AuthService) {}
+  onSignout() {
+    this.auth.signOut();
+  }
+}
 
 const routes: Routes = [
   { path: '', component: EntryComponent, children: [

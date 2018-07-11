@@ -6,7 +6,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMaterialModule } from '../../common/core/module/dashboard-material.module';
 
 import { DashboardComponent } from './dashboard.component';
-import { TransactionSettingsComponent } from '../../common/shared/component/transaction-settings/transaction-settings.component';
+import { ProductUpdateComponent } from '../../common/shared/component/product-update/product-update.component';
+import { ProductRemoveComponent } from '../../common/shared/component/product-remove/product-remove.component';
+import { ProductAddComponent } from '../../common/shared/component/product-add/product-add.component';
 
 @NgModule({
   imports: [
@@ -17,10 +19,14 @@ import { TransactionSettingsComponent } from '../../common/shared/component/tran
   ],
   declarations: [
     DashboardComponent,
-    TransactionSettingsComponent
+    ProductUpdateComponent,
+    ProductRemoveComponent,
+    ProductAddComponent
   ],
   entryComponents: [
-    TransactionSettingsComponent
+    ProductUpdateComponent,
+    ProductRemoveComponent,
+    ProductAddComponent
   ]
 })
 export class DashboardModule { }

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, Que
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
+import * as firebase from 'firebase/app';
 
 import { DatabaseService } from './database.service';
 
@@ -24,33 +25,52 @@ export class FirestoreService {
   }
 
   enableNetwork() {
-    this.firestore.firestore.enableNetwork();
+    return this.firestore.firestore.enableNetwork();
   }
 
   disableNetwork() {
-    this.firestore.firestore.disableNetwork();
+    return this.firestore.firestore.disableNetwork();
   }
 
-  addDocumentToCollection(path: string, data: any): void {
-    this.firestore.collection<any>(path).add(data);
+  addNewBeverage(beverage: any) {
+    this.productListCollection.add({
+      amount: 0, beginning: 0, delivery: 0, ending: 0,
+      sold: 0, total: 0, waste: 0, code: 'z',
+      beverageGroup: beverage.beverageGroup,
+      beverageName: `${beverage.beverageGroup} ${beverage.beverageName}`,
+      sellingPrice: beverage.sellingPrice,
+    })
   }
 
-  addDocumentToCollectionInRtdb(path: string, data: any): void {
-    this.database.createDocument(path, data);
+  updateBeverage(uid: string, beverage: any) {
+    this.productListCollection.snapshotChanges().pipe(
+      map((values: DocumentChangeAction<any>[]) => {
+        return values.map((value: DocumentChangeAction<any>) => {
+          const ref = value.payload.doc;
+
+          ref.id === uid ? ref.ref.update(beverage) : 0;
+          return value.payload.doc.data();
+        })
+      })
+    ).subscribe(() => (true));
   }
 
-  readCollectionValueChanges(path: string): Observable<any[]> {
-    return this.firestore.collection<any>(path).valueChanges();
-  }
-
-  readCollectionSnapshotChanges(path: string): Observable<DocumentChangeAction<any>[]> {
-    return this.firestore.collection<any>(path).snapshotChanges();
+  removeBeverage(uid: string) {
+    this.productListCollection.snapshotChanges().pipe(
+      map((values: DocumentChangeAction<any>[]) => {
+        return values.map((value: DocumentChangeAction<any>) => {
+          const ref = value.payload.doc;
+          ref.id === uid ? ref.ref.delete() : 0;
+          return value.payload.doc.data();
+        })
+      })
+    ).subscribe(() => (true));
   }
 
   mapChanges() {
     return this.productListCollection.snapshotChanges().pipe(
       map((values: DocumentChangeAction<any>[]) => {
-        return values.map((value: DocumentChangeAction<any>) => {
+        return values.map((value: DocumentChangeAction<any>, index: number) => {
 
           // codde here
 
@@ -68,9 +88,17 @@ export class FirestoreService {
           return { uid: ref.id , ...ref.data() };
         });
 
-        return _.sortBy(array, [data => data.id]);
+        return _.sortBy(array, [data => data.beverageGroup]);
       })
     );
+  }
+
+  addDocumentToCollectionFirestore(path: string, data: any): void {
+    this.firestore.collection<any>(path).add(data);
+  }
+
+  addDocumentToCollectionInRtdb(path: string, data: any): void {
+    this.database.createDocument(path, data);
   }
 
 }

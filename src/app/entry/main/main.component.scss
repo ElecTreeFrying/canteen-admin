@@ -10,6 +10,7 @@ $square: 240px;
   .mat-card {
     height: $square;
     width: $square;
+    cursor: pointer;
 
     .mat-card-content {
       height: 192px;
@@ -17,7 +18,8 @@ $square: 240px;
       p {
         text-align: center;
         font-size: 24px;
-        margin-top: 12px;
+        margin-top: 4px;
+        margin-bottom: 24px;
       }
 
       > div:nth-child(2) {

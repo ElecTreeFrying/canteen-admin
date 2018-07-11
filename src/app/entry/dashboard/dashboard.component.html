@@ -3,11 +3,19 @@
     <button mat-icon-button routerLink="/a">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <button mat-raised-button (click)="openSettings()">TRANSACTION SETTINGS</button>
+    <div>
+      <!-- <button mat-raised-button>REMOVE BEVERAGE</button> -->
+      <!-- <button mat-raised-button>UPDATE BEVERAGE</button> -->
+      <!-- <button mat-raised-button (click)="openAdd()">TRANSACTION SETTINGS</button> -->
+
+      <button mat-icon-button [disabled]="isDisabled" [matTooltip]="'update selected beverage'" (click)="openUpdate()"><mat-icon>update</mat-icon></button>
+      <button mat-icon-button [disabled]="isDisabled" [matTooltip]="'remove selected beverage'" (click)="openRemove()"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button [matTooltip]="'add beverage product'" (click)="openAdd()"><mat-icon>add_box</mat-icon></button>
+    </div>
   </div>
 
   <mat-form-field color="accent">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input matInput autocomplete="off" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
   <div class="mat-elevation-z8" id="table">
@@ -23,11 +31,6 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
-      </ng-container>
-
       <ng-container matColumnDef="beverageName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Beverage name </th>
         <td mat-cell *matCellDef="let row"> {{ row.beverageName }} </td>
@@ -35,7 +38,8 @@
 
       <ng-container matColumnDef="code">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
-        <td mat-cell *matCellDef="let row"> {{ row.code }} </td>
+        <!-- <td mat-cell *matCellDef="let row"> {{ row.code }} </td> -->
+        <td mat-cell *matCellDef="let row"> {{ row.beverageGroup }} </td>
       </ng-container>
 
       <ng-container matColumnDef="beginning">
