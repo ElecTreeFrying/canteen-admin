@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -18,7 +17,6 @@ export class StartupComponent implements OnInit {
 
   constructor(
     @Inject(FormBuilder) public fb: FormBuilder,
-    @Inject(DOCUMENT) private document: any,
     private router: Router,
     private auth: AuthService,
     private firestore: FirestoreService

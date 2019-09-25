@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DatabaseService } from '../../common/core/service/database.service';
+
 @Component({
   selector: 'app-account-details',
   templateUrl: './account-details.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private database: DatabaseService
+  ) { }
 
   ngOnInit() {
+    this.database.currentUser('')
   }
 
 }

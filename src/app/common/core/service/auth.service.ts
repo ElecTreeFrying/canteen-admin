@@ -24,6 +24,8 @@ export class AuthService {
       state !== null ? console.log(state) : 0;
     });
   }
+  
+  
 
   signUp(email: string, password: string): Promise<any> {
     return this.fire.auth.createUserWithEmailAndPassword(email, password);
@@ -33,7 +35,7 @@ export class AuthService {
     return this.fire.auth.signInWithEmailAndPassword(auth.email, auth.password);
   }
 
-  signOut() {
+  async signOut() {
     return this.fire.auth.signOut().then(() => {
       this.firestore.disableNetwork().then(() => {
         this.router.navigate(['/']);

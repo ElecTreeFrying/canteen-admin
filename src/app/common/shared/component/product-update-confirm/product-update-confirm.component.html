@@ -1,0 +1,19 @@
+<p>Are you sure you want to update selected beverage?</p>
+
+<mat-divider></mat-divider>
+
+<div id="wrapper">
+  <div>
+    <p class="light">Beverage short name</p>
+    <p>{{ data.beverage.beverageShortName }}</p>
+  </div>
+  <div>
+    <p class="light">Beverage selling price</p>
+    <p>{{ data.beverage.sellingPrice }}</p>
+  </div>
+</div>
+
+<div id="footer">
+  <button mat-raised-button mat-dialog-close color="accent" (click)="onContinue()">CONTINUE</button>
+  <button mat-raised-button mat-dialog-close color="warn">CANCEL</button>
+</div>

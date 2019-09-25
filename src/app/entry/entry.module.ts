@@ -26,7 +26,7 @@ const routes: Routes = [
     { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
     { path: 'account', loadChildren: './account-details/account-details.module#AccountDetailsModule' },
     { path: 'preference', loadChildren: './preferences/preferences.module#PreferencesModule' },
-    { path: 'help', loadChildren: './help/help.module#HelpModule' }
+    { path: 'summary', loadChildren: './summary/summary.module#SummaryModule' }
   ] }
 ];
 

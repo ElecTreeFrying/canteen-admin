@@ -1,63 +1,122 @@
-<h4>Update beverage</h4>
-<div id="divider">
-  <mat-divider></mat-divider>
-</div>
-<div id="wrapper">
-  <form [formGroup]="form">
+<!-- <div class="container" data-simplebar> -->
+<div class="container">
+  <h4>Update beverage</h4>
+  <div id="divider">
+    <mat-divider></mat-divider>
+  </div>
+  <div id="wrapper">
+    <form [formGroup]="form">
 
-    <mat-form-field color="accent" appearance="outline">
-      <mat-label>Beverage group</mat-label>
-      <input matInput type="text" autocomplete="off" formControlName="beverageGroup">
-    </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Beverage group</mat-label>
+        <input matInput type="text" autocomplete="off" formControlName="beverageGroup">
+      </mat-form-field>
 
-    <mat-form-field color="accent" appearance="outline">
-      <mat-label>Beverage name</mat-label>
-      <input matInput type="text" autocomplete="off" formControlName="beverageName">
-    </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Beverage name</mat-label>
+        <input matInput type="text" autocomplete="off" formControlName="beverageName">
+        <button mat-icon-button matSuffix color="accent" (click)="formBeverageName.patchValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="formBeverageName.errors?.required">This is required.</mat-error>
+        <mat-error *ngIf="formBeverageName.errors?.nullValidator">This is required.</mat-error>
+        <mat-error *ngIf="formBeverageName.errors?.minlength">Beverage name too short.</mat-error>
+        <mat-error *ngIf="formBeverageName.errors?.pattern">Beverage name invalid.</mat-error>
+      </mat-form-field>
 
-    <mat-form-field color="accent" appearance="outline">
-      <mat-label>Selling price</mat-label>
-      <input matInput type="number" autocomplete="off" formControlName="sellingPrice">
-    </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Beverage short name</mat-label>
+        <input matInput type="text" maxlength="14" autocomplete="off" formControlName="beverageShortName" #beverageShortName>
+        <button mat-icon-button matSuffix color="accent" (click)="formBeverageShorName.patchValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="formBeverageShorName.errors?.required">This is required.</mat-error>
+        <mat-hint align="end" aria-live="polite">
+          {{beverageShortName.value.length}} / 14
+        </mat-hint>
+      </mat-form-field>
 
-    <div>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Selling price</mat-label>
+        <input matInput type="number" autocomplete="off" (click)="onClickSellingPrice()" formControlName="sellingPrice">
+        <button mat-icon-button matSuffix color="accent" (click)="formSellingPrice.patchValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="formSellingPrice.errors?.required">This is required.</mat-error>
+        <mat-error *ngIf="formSellingPrice.errors?.max">Selling price must be less than 100.</mat-error>
+      </mat-form-field>
+
       <div>
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Beginning</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="beginning">
-        </mat-form-field>
+        <div>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Beginning</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="beginning">
+            <button mat-icon-button matSuffix color="accent" (click)="formBeginning.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formBeginning.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formBeginning.errors?.max">Beginning must be less than 100.</mat-error>
+          </mat-form-field>
 
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Delivery</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="delivery">
-        </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Delivery</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="delivery">
+            <button mat-icon-button matSuffix color="accent" (click)="formDelivery.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formDelivery.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formDelivery.errors?.max">Delivery must be less than 100.</mat-error>
+          </mat-form-field>
 
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Waste</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="waste">
-        </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Waste</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="waste">
+            <button mat-icon-button matSuffix color="accent" (click)="formWaste.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formWaste.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formWaste.errors?.max">Waste must be less than 100.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Total</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="total">
+            <button mat-icon-button matSuffix color="accent" (click)="formTotal.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formTotal.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formTotal.errors?.max">Total must be less than 100.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Ending</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="ending">
+            <button mat-icon-button matSuffix color="accent" (click)="formEnding.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formEnding.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formEnding.errors?.max">Ending must be less than 100.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Sold</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="sold">
+            <button mat-icon-button matSuffix color="accent" (click)="formSold.patchValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="formSold.errors?.required">This is required.</mat-error>
+            <mat-error *ngIf="formSold.errors?.max">Sold must be less than 999.</mat-error>
+          </mat-form-field>
+        </div>
       </div>
 
-      <div>
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Total</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="total">
-        </mat-form-field>
+    </form>
+  </div>
+  <div id="buttons">
+    <button mat-raised-button color="accent" mat-dialog-close>BACK</button>
+    <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="onUpdate()">UPDATE</button>
+  </div>
 
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Ending</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="ending">
-        </mat-form-field>
-
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Sold</mat-label>
-          <input matInput type="number" autocomplete="off" formControlName="sold">
-        </mat-form-field>
-      </div>
-    </div>
-
-  </form>
-</div>
-<div id="buttons">
-  <button mat-raised-button color="accent" (click)="onUpdate()">UPDATE</button>
 </div>

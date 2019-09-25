@@ -2,10 +2,25 @@
   margin: 16px 0;
 }
 
+.container {
+  padding: 0;
+  // margin: -24px;
+  // padding: -24px;
+  // overflow: auto;
+}
+
 #wrapper {
   width: 425px;
   margin-top: 16px;
-  display: flex;
+  // margin: 0 -24px 0 -24px;
+  // display: flex;
+    
+  form {
+    // width: 425px;
+    // height: 500px;
+    // padding: 0 -24px 0 -24px;
+    // overflow: auto;
+  }
 
   div {
     flex-grow: 1;
@@ -26,17 +41,20 @@
     display: flex;
     margin: 0;
     width: auto;
+    width: 425px / 2;
 
     .mat-form-field {
-      width: 99%;
+      width: 100%;
     }
 
     > div:first-child {
-      margin: 0;
+      width: 207.5px;
+      margin: 0 5px 0 0;
     }
 
     > div:last-child {
-      margin: 0;
+      width: 207.5px;
+      margin: 0 0 0 5px;
     }
   }
 }
@@ -44,7 +62,11 @@
 #buttons {
   display: flex;
 
-  > .mat-raised-button {
+  button:first-child {
     margin-left: auto;
+  }
+
+  button:last-child {
+    margin-left: 8px;
   }
 }

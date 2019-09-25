@@ -12,7 +12,8 @@ import {
   MatAutocompleteModule,
   MatTooltipModule,
   MatRadioModule,
-  MatDividerModule
+  MatDividerModule,
+  MatMenuModule,
 } from '@angular/material';
 
 @NgModule({
@@ -29,7 +30,8 @@ import {
     MatAutocompleteModule,
     MatTooltipModule,
     MatRadioModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule,
   ]
 })
 export class DashboardMaterialModule { }

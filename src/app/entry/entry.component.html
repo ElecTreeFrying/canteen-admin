@@ -2,8 +2,67 @@
   <div class="wrap">
 
     <mat-toolbar>
-      <span routerLink="/">Administrator</span>
-      <button mat-icon-button (click)="onSignout()" [matTooltip]="'session sign out'"><mat-icon>power_settings_new</mat-icon></button>
+      <button mat-icon-button id="logo" routerLink="/a">
+        <mat-icon>store</mat-icon>
+      </button>
+      
+      <span routerLink="/a">Beverage Kiosk Administrator</span>
+      <button mat-icon-button class="icon-right" id="config" routerLink="/a/account">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-right" routerLink="/a/dashboard">
+        <mat-icon>dashboard</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-right" [matMenuTriggerFor]="menuToolbar">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu xPosition="before" #menuToolbar="matMenu">
+        <button mat-menu-item routerLink="/a/dashboard">
+          <mat-icon>dashboard</mat-icon>
+          Admin dashboard
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="others">
+          <mat-icon>timelines</mat-icon>
+          Others
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="info">
+          <mat-icon>info</mat-icon>
+          Info
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onSignout()">
+          <mat-icon>power_settings_new</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+      
+      <mat-menu #info="matMenu">
+        <button mat-menu-item>
+          <mat-icon>help</mat-icon>
+          Help
+        </button>
+        <button mat-menu-item>
+          <mat-icon>bug_report</mat-icon>
+          Report Problem
+        </button>
+      </mat-menu>
+      
+      <mat-menu #others="matMenu">
+        <button mat-menu-item routerLink="/a/account">
+          <mat-icon>person</mat-icon>
+          Account details
+        </button>
+        <button mat-menu-item routerLink="/a/summary">
+          <mat-icon>assessment</mat-icon>
+          Report Summary
+        </button>
+        <button mat-menu-item routerLink="/a/preference">
+          <mat-icon>settings</mat-icon>
+          Preference
+        </button>
+      </mat-menu>
+      
     </mat-toolbar>
 
   </div>

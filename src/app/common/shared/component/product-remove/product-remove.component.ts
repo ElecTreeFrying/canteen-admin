@@ -24,7 +24,7 @@ export class ProductRemoveComponent implements OnInit {
   }
 
   onRemove() {
-    this.firestore.removeBeverage(this.data.uid)
+    this.firestore.removeBeverage(this.data)
     this.onCancel();
   }
 

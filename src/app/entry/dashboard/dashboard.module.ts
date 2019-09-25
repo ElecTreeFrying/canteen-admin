@@ -6,9 +6,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMaterialModule } from '../../common/core/module/dashboard-material.module';
 
 import { DashboardComponent } from './dashboard.component';
-import { ProductUpdateComponent } from '../../common/shared/component/product-update/product-update.component';
-import { ProductRemoveComponent } from '../../common/shared/component/product-remove/product-remove.component';
 import { ProductAddComponent } from '../../common/shared/component/product-add/product-add.component';
+import { ProductUpdateComponent } from '../../common/shared/component/product-update/product-update.component';
+import { ProductUpdateConfirmComponent } from '../../common/shared/component/product-update-confirm/product-update-confirm.component';
+import { ProductRemoveComponent } from '../../common/shared/component/product-remove/product-remove.component';
+
+import { TestDeviceAddComponent } from '../../common/shared/component/test-device-add/test-device-add.component';
 
 @NgModule({
   imports: [
@@ -19,14 +22,18 @@ import { ProductAddComponent } from '../../common/shared/component/product-add/p
   ],
   declarations: [
     DashboardComponent,
+    ProductAddComponent,
     ProductUpdateComponent,
+    ProductUpdateConfirmComponent,
     ProductRemoveComponent,
-    ProductAddComponent
+    TestDeviceAddComponent
   ],
   entryComponents: [
+    ProductAddComponent,
     ProductUpdateComponent,
+    ProductUpdateConfirmComponent,
     ProductRemoveComponent,
-    ProductAddComponent
+    TestDeviceAddComponent
   ]
 })
 export class DashboardModule { }

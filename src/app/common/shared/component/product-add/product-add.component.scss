@@ -34,28 +34,41 @@
     }
   }
 
-  #second {
+  #second, #seventh {
     > div {
       display: flex;
       flex-flow: column wrap;
       margin-top: 16px;
 
       > #con1 {
-        flex-grow: 1;
-        margin-right: 5px;
+        width: 400px;
+        margin-bottom: 16px;
         display: flex;
-
-        span {
-          margin: auto 0;
+      
+        .break {
+          flex-basis: 100%;
+          height: 0;
+        }
+        
+        div {
+          flex-grow: 1;
+          margin: 0 5px;
+      
+          .light {
+            color: #b3b3b3;
+            margin: 0;
+            font-size: 12px;
+          }
         }
       }
 
       > #con2 {
-        margin-left: 5px;
-        flex-grow: 1;
-
+        display: flex;
+        justify-content: space-around;
+      
         .mat-raised-button {
-          margin-left: 10px;
+          width: 100%;
+          margin: 0 5px;
         }
       }
     }

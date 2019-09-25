@@ -3,7 +3,6 @@ import * as moment from 'moment';
 
 import { AuthService } from '../../../core/service/auth.service';
 import { FirestoreService } from '../../../core/service/firestore.service';
-import { DatabaseService } from '../../../core/service/database.service';
 
 import { User } from '../../interface/interface';
 import { UserModel } from '../../model/model';
@@ -18,7 +17,6 @@ export class EntryService {
   constructor(
     private auth: AuthService,
     private firestore: FirestoreService,
-    private database: DatabaseService
   ) { }
 
   createNewUser(userDetails: User): Promise<any> {
@@ -29,11 +27,8 @@ export class EntryService {
         this.firestore.enableNetwork();
 
         const timestamp = moment().unix();
-
         const user = new UserModel(state.user.uid, timestamp, userDetails);
-
-        this.firestore.usersCollection.add({ ...user });
-        this.database.createDocument('users', user);
+        this.firestore.createNewUser({ ...user });
 
         return user;
 
