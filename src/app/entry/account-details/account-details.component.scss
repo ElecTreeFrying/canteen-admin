@@ -3,3 +3,76 @@
   display: flex;
   justify-content: space-between;
 }
+
+#content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  
+  display: flex;
+  flex-flow: row wrap;
+  width: 1050px;
+  margin-top: 24px;
+  
+  
+  .header {
+    flex-basis: 100%;
+    margin-bottom: 32px;
+  }
+  
+  .image {
+    height: 500px;
+    flex-basis: 50%;
+    
+    img {
+      border-radius: 20px;
+    }
+    
+    & > div {
+      display: flex;
+      width: 285px;
+      
+      div {
+        margin: 8px auto 0 auto;
+      }
+      
+      .mat-icon-button {
+        margin: 0 2px;
+      }
+    }
+  }
+  
+  .account {
+    height: 500px;
+    flex-basis: 50%;
+    margin-left: -240px;
+    padding-left: 96px;
+    display: flex;
+    flex-flow: row wrap;
+    
+    .box {
+      flex-basis: 50%;
+    }
+
+    .second { padding-left: 64px; }
+    
+    .low { transform: translateY(-20px) }
+    .lower { transform: translateY(-40px) }
+    .lowest { transform: translateY(-60px) }
+    .lowestest { transform: translateY(-80px) }
+    
+    .label {
+      font-size: 11px;
+      color: rgb(145, 142, 142);
+      margin-bottom: 4px;
+    }
+    
+    .break {
+      flex-basis: 100%;
+      width: 0px;
+      height: 0px;
+      overflow: hidden;
+    }
+  }
+}

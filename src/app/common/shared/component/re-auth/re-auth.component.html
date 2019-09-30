@@ -1,0 +1,22 @@
+
+<div id="content">
+  
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Email address</mat-label>
+      <input matInput type="email" formControlName="email">
+      <!-- <mat-error *ngIf=""></mat-error> -->
+    </mat-form-field><br>
+  
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <!-- <mat-error *ngIf=""></mat-error> -->
+    </mat-form-field><br>
+  
+    <button mat-raised-button color="accent" [disabled]="isDisabled">RE-AUTHENTICATE</button>
+  
+  </form>
+  
+</div>

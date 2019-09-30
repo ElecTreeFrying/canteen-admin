@@ -2,7 +2,7 @@
   <div class="wrap">
 
     <mat-toolbar>
-      <button mat-icon-button id="logo" routerLink="/a">
+      <button mat-icon-button id="logo" matTooltip="home" routerLink="/a">
         <mat-icon>store</mat-icon>
       </button>
       
@@ -13,7 +13,8 @@
       <button mat-icon-button class="icon-right" routerLink="/a/dashboard">
         <mat-icon>dashboard</mat-icon>
       </button>
-      <button mat-icon-button class="icon-right" [matMenuTriggerFor]="menuToolbar">
+      <button mat-button routerLink="/a">Home</button>
+      <button mat-icon-button class="icon-right m-0" [matMenuTriggerFor]="menuToolbar">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
 
@@ -26,10 +27,10 @@
           <mat-icon>timelines</mat-icon>
           Others
         </button>
-        <button mat-menu-item [matMenuTriggerFor]="info">
+        <!-- <button mat-menu-item [matMenuTriggerFor]="info">
           <mat-icon>info</mat-icon>
           Info
-        </button>
+        </button> -->
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="onSignout()">
           <mat-icon>power_settings_new</mat-icon>
@@ -38,11 +39,11 @@
       </mat-menu>
       
       <mat-menu #info="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/a/help" disabled>
           <mat-icon>help</mat-icon>
           Help
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/a/bugfix" disabled>
           <mat-icon>bug_report</mat-icon>
           Report Problem
         </button>
@@ -59,7 +60,7 @@
         </button>
         <button mat-menu-item routerLink="/a/preference">
           <mat-icon>settings</mat-icon>
-          Preference
+          Preferences
         </button>
       </mat-menu>
       

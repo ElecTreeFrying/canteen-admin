@@ -3,6 +3,7 @@ import {
   MatSnackBar,
   MatSnackBarConfig,
 } from '@angular/material';
+import * as Chance from 'chance';
 
 import {
   MatSnackBarHorizontalPosition,
@@ -37,6 +38,12 @@ export class SharedService {
     config.duration = option.duration;
     config.panelClass = option.class;
     return config;
+  }
+  
+  get randomHash() {
+    
+    const chance = new Chance();
+    return Chance().hash({ length: 25 })
   }
   
 }

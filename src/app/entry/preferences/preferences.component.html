@@ -3,8 +3,103 @@
     <button mat-icon-button routerLink="/a">
       <mat-icon>arrow_back</mat-icon>
     </button>
+  </div>
+  
+  <div id="content">
     
+    <div class="details header">
+      <h3>Preferences</h3>
+      <mat-divider></mat-divider>
+    </div>
     
+    <form [formGroup]="form">
+    
+      <div class="left-pane">
+        <h5>Update email address</h5>
+      
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Employee email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="emailError?.email">Invalid email address.</mat-error>
+        </mat-form-field><br>
+        
+        <button mat-raised-button color="accent" [disabled]="bool?.emailError" (click)="post('email')">SAVE</button>
+        
+        <mat-divider></mat-divider>
+        
+        <h5>Update first name</h5>
+        
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" formControlName="firstName">
+          <mat-error *ngIf="firstNameError?.minlength">Invalid first name.</mat-error>
+        </mat-form-field><br>
+        
+        <button mat-raised-button color="accent" [disabled]="bool?.firstNameError" (click)="post('firstname')">SAVE</button>
+        
+      </div>
+      
+      <div class="mid-pane">
+        <h5>Update employee ID</h5>
+        
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Employee ID</mat-label>
+          <input matInput type="text" formControlName="id">
+          <mat-error *ngIf="employeeIdError?.minlength">Invalid employee ID.</mat-error>
+          <mat-error *ngIf="employeeIdError?.maxlength">Invalid employee ID.</mat-error>
+        </mat-form-field><br>
+        
+        <button mat-raised-button color="accent" [disabled]="bool?.employeeIdError" (click)="post('id')">SAVE</button>
+        
+        <mat-divider></mat-divider>
+        
+        <h5>Update last name</h5>
+        
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" formControlName="lastName">
+          <mat-error *ngIf="lastNameError?.minlength">Invalid last name.</mat-error>
+        </mat-form-field><br>
+        
+        <button mat-raised-button color="accent" [disabled]="bool?.lastNameError" (click)="post('lastname')">SAVE</button>
+      </div>
+  
+      <div class="right-pane">
+        <h5>Update password</h5>
+        
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="passwordError?.minlength">Password too short.</mat-error>
+        </mat-form-field><br>
+        
+        <mat-form-field color="accent" appearance="outline" *ngIf="true">
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" formControlName="confirm">
+          <mat-error *ngIf="!confirmError?.isNotMatched">Password does not match.</mat-error>
+        </mat-form-field><br>
+        
+        <button mat-raised-button color="accent" [disabled]="bool?.confirmError" (click)="post('password')">SAVE</button>
+        
+        <!-- <mat-divider></mat-divider>
+        
+        <h5>Change theme</h5>
+        <button mat-raised-button color="accent">LIGHT</button>
+        <button mat-raised-button>DARK</button> -->
+        
+        <mat-divider></mat-divider>
+        
+        <h5>Change display photo</h5>
+        <button mat-raised-button color="accent" (click)="post('photo')">UPDATE</button>
+        
+        <mat-divider></mat-divider>
+        
+        <h5>Delete Account</h5>
+        <button mat-raised-button color="warn" (click)="post('delete')">CONFIRM</button>
+        
+      </div>
+    
+    </form>
     
   </div>
 </div>

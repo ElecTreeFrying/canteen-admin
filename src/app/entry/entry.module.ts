@@ -1,6 +1,6 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router'
 
 import { EntryMaterialModule } from '../common/core/module/entry-material.module';
 
@@ -26,7 +26,9 @@ const routes: Routes = [
     { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
     { path: 'account', loadChildren: './account-details/account-details.module#AccountDetailsModule' },
     { path: 'preference', loadChildren: './preferences/preferences.module#PreferencesModule' },
-    { path: 'summary', loadChildren: './summary/summary.module#SummaryModule' }
+    { path: 'summary', loadChildren: './summary/summary.module#SummaryModule' },
+    { path: 'help', loadChildren: './help/help.module#HelpModule' },
+    { path: 'bugfix', loadChildren: './report-problem/report-problem.module#ReportProblemModule' }
   ] }
 ];
 

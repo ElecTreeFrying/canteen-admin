@@ -5,6 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 import { FirestoreService } from '../../common/core/service/firestore.service';
 import { DatabaseService } from '../../common/core/service/database.service';
+import { SharedService } from '../../common/core/service/shared.service';
 
 import { ProductAddComponent } from '../../common/shared/component/product-add/product-add.component';
 import { ProductUpdateComponent } from '../../common/shared/component/product-update/product-update.component';
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
   selectedRow: any = null;
   isDisabled: boolean = true;
   isHideSellingPrice: boolean = false;
+  isLoaded: boolean = false;
 
   displayedColumns = ['select', 'beverageName', 'code', 'beginning', 'delivery', 'waste', 'total', 'ending', 'sold', 'sellingPrice', 'amount'];
   firestoreData: any[];
@@ -34,6 +36,7 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     private firestore: FirestoreService,
     private database: DatabaseService,
+    private shared: SharedService
   ) {
     this.displayData();
   }
@@ -99,7 +102,45 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(TestDeviceAddComponent);
   }
   
+  options(config: string) {
+    
+    switch(config) {
+      case 'refreh': {
+        this.displayData();
+        this.shared.openSnack({
+          duration: 3500, horizontal: 'center', vertical: 'bottom', message: 'Refreshed.'
+        })
+        break;
+      }
+      case 'save': {
+        const option = confirm('Are you sure you want to save all transactions?');
+        option ? (() => {
+          this.database.saveAllTransaction()
+          this.shared.openSnack({
+            duration: 3500, horizontal: 'center', vertical: 'bottom', message: 'Saved all transactions.'
+          })
+        })() : 0;
+        break;
+      }
+      case 'reset': {
+        const option = confirm('Are you sure you want to reset all transactions?');
+        option ? (() => {
+          this.database.removeAllTransaction()
+          this.shared.openSnack({
+            duration: 3500, horizontal: 'center', vertical: 'bottom', message: 'Successfully removed all transactions.'
+          })
+        })() : 0;
+        break;
+      }
+      default: break;
+    }
+    
+  }
+  
   displayData(item?: number) {
+    
+    this.isLoaded = false;
+    
     this.firestore.readProductList().subscribe((data: any[]) => {
       
       if (item === 1) {
@@ -117,6 +158,8 @@ export class DashboardComponent implements OnInit {
         this.firestoreData = data;
         this.isHideSellingPrice = false;
       }
+      
+      this.isLoaded = true;
       
       this.dataSource = new ProductDataSource(data);
       

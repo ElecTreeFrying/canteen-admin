@@ -1,7 +1,97 @@
 <div class="wrap">
+  
   <div id="header-button">
     <button mat-icon-button routerLink="/a">
       <mat-icon>arrow_back</mat-icon>
     </button>
   </div>
+  
+  <div id="content">
+    
+    <div class="summary header">
+      <h3>Report Summary</h3>
+      <mat-divider></mat-divider>
+    </div>
+    
+    <div class="main-content">
+      
+      <div class="main left">
+        
+        <mat-card>
+          <mat-card-content>
+            
+            <mat-nav-list>
+              <a mat-list-item *ngFor="let item of (summaryItems | async)" (click)="selectItem(item)">{{ item?.datetime }}</a>
+              <!-- <a mat-list-item *ngFor="let item of [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]">Lorem ipsum</a> -->
+            </mat-nav-list>
+            
+          </mat-card-content>
+        </mat-card>
+        
+      </div>
+      
+      <div class="main right">
+        
+        <mat-card>
+          <mat-card-content>
+            
+            <p><strong>Total sales:</strong> {{ total }}</p>
+            <p><strong>Number of items sold:</strong> {{ sold }}</p>
+            
+          </mat-card-content>
+        </mat-card>
+        
+        <br>
+        
+        <div class="mat-elevation-z8" id="table">
+          <table id="table" mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="onSelectRow(row)"
+                              (change)="$event ? selection.toggle(row) : selection.clear()"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="beverageName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Beverage name </th>
+              <td mat-cell *matCellDef="let row"> {{ row.beverageName }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+              <td mat-cell *matCellDef="let row"> {{ row.code }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sold">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Sold </th>
+              <td mat-cell *matCellDef="let row"> {{ row.sold }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sellingPrice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Selling price </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{ row.sellingPrice }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{ row.amount }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[11, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </div>
+      
+    </div>
+
+  </div>
+  
 </div>

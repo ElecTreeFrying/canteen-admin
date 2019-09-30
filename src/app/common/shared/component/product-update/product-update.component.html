@@ -39,7 +39,7 @@
       <mat-form-field color="accent" appearance="outline">
         <mat-label>Selling price</mat-label>
         <input matInput type="number" autocomplete="off" (click)="onClickSellingPrice()" formControlName="sellingPrice">
-        <button mat-icon-button matSuffix color="accent" (click)="formSellingPrice.patchValue('')">
+        <button mat-icon-button matSuffix color="accent" (click)="formSellingPrice.patchValue(0)">
           <mat-icon>clear</mat-icon>
         </button>
         <mat-error *ngIf="formSellingPrice.errors?.required">This is required.</mat-error>
@@ -51,7 +51,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Beginning</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="beginning">
-            <button mat-icon-button matSuffix color="accent" (click)="formBeginning.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formBeginning.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formBeginning.errors?.required">This is required.</mat-error>
@@ -61,7 +61,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Delivery</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="delivery">
-            <button mat-icon-button matSuffix color="accent" (click)="formDelivery.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formDelivery.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formDelivery.errors?.required">This is required.</mat-error>
@@ -71,7 +71,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Waste</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="waste">
-            <button mat-icon-button matSuffix color="accent" (click)="formWaste.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formWaste.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formWaste.errors?.required">This is required.</mat-error>
@@ -83,7 +83,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Total</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="total">
-            <button mat-icon-button matSuffix color="accent" (click)="formTotal.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formTotal.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formTotal.errors?.required">This is required.</mat-error>
@@ -93,7 +93,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Ending</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="ending">
-            <button mat-icon-button matSuffix color="accent" (click)="formEnding.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formEnding.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formEnding.errors?.required">This is required.</mat-error>
@@ -103,7 +103,7 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Sold</mat-label>
             <input matInput type="number" autocomplete="off" formControlName="sold">
-            <button mat-icon-button matSuffix color="accent" (click)="formSold.patchValue('')">
+            <button mat-icon-button matSuffix color="accent" (click)="formSold.patchValue(0)">
               <mat-icon>clear</mat-icon>
             </button>
             <mat-error *ngIf="formSold.errors?.required">This is required.</mat-error>

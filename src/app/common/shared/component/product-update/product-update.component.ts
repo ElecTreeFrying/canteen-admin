@@ -37,7 +37,7 @@ export class ProductUpdateComponent implements OnInit {
         Validators.pattern(/^[A-z0-9\s_.-]+$/)
       ] ],
       'sellingPrice': [ this.data.sellingPrice, [
-        Validators.required,
+        Validators.min(0),
         Validators.max(99),
       ] ],
       'beginning': [ this.data.beginning, [
@@ -98,8 +98,12 @@ export class ProductUpdateComponent implements OnInit {
     
     const uid = this.data.uid;
     const beverage = this.form.value;
-    
+
+
+    let count = 0;
     this.database.compareToUpdate(beverage).subscribe((res) => {
+
+      if (count > 0) return;
 
       !res
         ? this.dialog.open(ProductUpdateConfirmComponent, {
@@ -111,6 +115,8 @@ export class ProductUpdateComponent implements OnInit {
           horizontal: 'center',
           vertical: 'bottom'
         })
+      
+      count++;
 
     });
     

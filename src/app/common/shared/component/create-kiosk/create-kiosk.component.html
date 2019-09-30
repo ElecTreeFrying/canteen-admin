@@ -1,0 +1,31 @@
+
+<div id="content">
+  
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-error *ngIf="nameError?.required">This is required.</mat-error>
+      <mat-error *ngIf="nameError?.minlength">Invalid name.</mat-error>
+    </mat-form-field><br>
+  
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>ID</mat-label>
+      <input matInput type="text" formControlName="id">
+      <mat-error *ngIf="usernameError?.required">This is required.</mat-error>
+      <mat-error *ngIf="usernameError?.minlength">Invalid username.</mat-error>
+    </mat-form-field><br>
+  
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Pin</mat-label>
+      <input matInput type="password" formControlName="pin">
+      <mat-error *ngIf="passwordError?.required">This is required.</mat-error>
+      <mat-error *ngIf="passwordError?.minlength">Invalid password.</mat-error>
+    </mat-form-field><br>
+    
+    <button mat-raised-button [disabled]="form.invalid" color="accent">CREATE</button>
+  
+  </form>
+  
+</div>

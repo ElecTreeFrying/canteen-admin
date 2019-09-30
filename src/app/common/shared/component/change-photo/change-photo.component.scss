@@ -1,0 +1,47 @@
+
+#content {
+  width: 285px;
+  
+  img {
+    border-radius: 20px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    margin-top: 8px;
+    
+    [type="file"] {
+      display: none;
+    }
+    
+    .buttons {
+      margin: auto;
+      
+      .mat-icon-button {
+        margin: 0 2px;
+      }
+    }
+  }
+  
+  .input-container {
+    margin-top: 8px;
+    
+    .mat-form-field {
+      width: 100%;
+    }
+    
+    .option-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      
+      .first {
+        flex-basis: 48.5%;
+      }
+      
+      .second {
+        flex-basis: 48.5%;
+      }
+    }
+  }
+}

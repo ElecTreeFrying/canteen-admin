@@ -3,24 +3,16 @@
 }
 
 .container {
-  padding: 0;
-  // margin: -24px;
-  // padding: -24px;
-  // overflow: auto;
+  margin: -24px;
+  padding: 24px;
+  width: 425px;
+  height: 700px;
+  overflow-y: auto;
 }
 
 #wrapper {
-  width: 425px;
+  width: 100%;
   margin-top: 16px;
-  // margin: 0 -24px 0 -24px;
-  // display: flex;
-    
-  form {
-    // width: 425px;
-    // height: 500px;
-    // padding: 0 -24px 0 -24px;
-    // overflow: auto;
-  }
 
   div {
     flex-grow: 1;
@@ -40,21 +32,15 @@
   form > div {
     display: flex;
     margin: 0;
-    width: auto;
-    width: 425px / 2;
-
-    .mat-form-field {
-      width: 100%;
-    }
 
     > div:first-child {
-      width: 207.5px;
-      margin: 0 5px 0 0;
+      margin: 0 2px 0 0;
+      width: 153px
     }
 
     > div:last-child {
-      width: 207.5px;
-      margin: 0 0 0 5px;
+      margin: 0 0 0 2px;
+      width: 153px
     }
   }
 }

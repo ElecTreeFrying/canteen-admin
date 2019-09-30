@@ -1,0 +1,11 @@
+
+<div id="content">
+  
+  <div *ngFor="let item of (users | async); last as isLast">
+    
+    <p *ngIf="!isLast"><strong>Name:</strong> {{ item.name }} / <strong>ID:</strong> {{ item.id }}</p>
+    <p *ngIf="isLast" class="m-0"><strong>Name:</strong> {{ item.name }} / <strong>ID:</strong> {{ item.id }}</p>
+    
+  </div>
+
+</div>

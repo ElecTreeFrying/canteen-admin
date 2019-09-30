@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm, FormGroup, FormBuilder, AbstractControl, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl, Validators, ValidationErrors } from '@angular/forms';
 
 import { EntryService } from './entry.service';
+import { SharedService } from '../../../core/service/shared.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class RegistrationComponent implements OnInit {
     @Inject(FormBuilder) public fb: FormBuilder,
     private router: Router,
     private entry: EntryService,
-    // private notice: NoticeService
+    private shared: SharedService
   ) {
     this.registrationForm = fb.group({
       'email': [ '', [ Validators.required, Validators.email ] ],
@@ -28,7 +29,8 @@ export class RegistrationComponent implements OnInit {
       'repeatPassword': [ '', [ Validators.required, this.repeatPasswordCheck.bind(this)] ],
       'firstName': [ '', [ Validators.required, Validators.minLength(2), CustomValidator.containNum ] ],
       'lastName': [ '', [ Validators.required, Validators.minLength(2), CustomValidator.containNum ] ],
-      'employeeId': [ '', [ Validators.required ] ]
+      // 'employeeId': [ '', [ Validators.required, Validators.minLength(10), Validators.maxLength(10) ] ]
+      'employeeId': [ '', [ Validators.maxLength(10) ] ]
     })
   }
 
@@ -36,6 +38,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.valueChanges.subscribe((response) => {
       this.password = response.password;
     });
+    
   }
 
   repeatPasswordCheck(control: AbstractControl): ValidationErrors {
@@ -53,26 +56,62 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
 
     this.isProgressing = true;
-
+    
+    this.shared.openSnack({
+      duration: 3500,
+      horizontal: 'center',
+      vertical: 'bottom',
+      message: 'Please wait.'
+    })
+    
     if (this.registrationForm.invalid) {
       this.isProgressing = false;
-      // this.notice.formError();
+      
+      this.shared.snack.dismiss()
+      this.shared.openSnack({
+        duration: 3500,
+        horizontal: 'center',
+        vertical: 'bottom',
+        message: 'Invalid form please try again.'
+      })
       return;
     }
 
     this.entry.createNewUser(this.registrationForm.value)
-      .then((data: any) => {
+      .then(() => {
+        
         this.isProgressing = false;
-        // this.notice.signUpSuccess(`${data.user.firstName} ${data.user.lastName}`);
-        this.router.navigate(['/', 'l']);
-      }).catch((state) => {
+        this.router.navigate(['/', 'a']);
+        
+        this.shared.snack.dismiss()
+        this.shared.openSnack({
+          duration: 1500,
+          horizontal: 'center',
+          vertical: 'bottom',
+          message: 'Successfully created an account.'
+        })
+        setTimeout(() => {
+          this.shared.openSnack({
+            duration: 3500,
+            horizontal: 'center',
+            vertical: 'bottom',
+            message: 'Logged in successfully.'
+          })
+        }, 1500);
+      }).catch((e) => {
+        
         this.isProgressing = false;
-        // this.notice.signUpError(state);
         this.registrationForm.reset();
+        
+        this.shared.snack.dismiss()
+        this.shared.openSnack({
+          duration: 3500,
+          horizontal: 'center',
+          vertical: 'bottom',
+          message: e['message']
+        })
       });
-
   }
-
 
 }
 

@@ -3,3 +3,47 @@
   display: flex;
   justify-content: space-between;
 }
+
+#content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  
+  display: flex;
+  flex-flow: row wrap;
+  width: 1050px;
+  margin-top: 24px;
+  
+  .header {
+    flex-basis: 100%;
+    margin-bottom: 32px;
+  }
+  
+  .main-content {
+    display: flex;
+    
+    .left {
+      flex-basis: 100%;
+      width: 255.5px;
+      
+      .mat-card {
+        max-height: 500px;
+        overflow: auto;
+      }
+    }
+    
+    .right {
+      padding-left: 32px;
+      
+      #table {
+        width: 758.5px;
+      }
+    }
+    
+  }
+  
+}
+
+// .left { border: 1px solid red; }
+// .right { border: 1px solid blue; }

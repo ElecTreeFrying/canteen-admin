@@ -1,0 +1,48 @@
+
+<div id="content">
+  
+  <div class="content image-container">
+    
+    <img [src]="image" alt="user-image" width="285" *ngIf="isPhoto || isLink">
+  
+    <img [src]="(user | async)?.firebase?.photoURL" alt="user-photo" width="285" (load)="change()" *ngIf="isCached">
+  
+  </div>
+  
+  <div class="content buttons-container">
+    <div class="buttons">
+      <input type="file" #file (change)="photo($event)">
+      <button mat-icon-button [disabled]="isWaiting || isURL" (click)="file.click()" matTooltip="Upload photo">
+        <mat-icon>photo</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="isWaiting" (click)="link()" matTooltip="Upload photo link">
+        <mat-icon>link</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="isWaiting || isURL" (click)="cached()" matTooltip="Generate random image">
+        <mat-icon>cached</mat-icon>
+      </button>
+      <button mat-icon-button mat-dialog-close matTooltip="Return to preferences">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div class="content input-container" *ngIf="isURL">
+    
+    <form [formGroup]="form">
+    
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>URL</mat-label>
+        <input matInput type="text" formControlName="input">
+      </mat-form-field>
+    
+      <div class="option-container">
+        <button mat-raised-button color="accent" class="first" (click)="update()">UPDATE</button>
+        <button mat-raised-button color="warn" class="second" (click)="cancel()">CANCEL</button>
+      </div>
+    
+    </form>
+    
+  </div>
+  
+</div>

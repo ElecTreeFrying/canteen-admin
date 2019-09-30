@@ -14,6 +14,14 @@
       <button mat-icon-button matTooltip="add new beverage" (click)="openAdd()">
         <mat-icon>add_box</mat-icon>
       </button>
+      <button mat-icon-button matTooltip="more options" [matMenuTriggerFor]="more">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu xPosition="before" #more="matMenu">
+        <button mat-menu-item (click)="options('refreh')">Refresh record</button>
+        <button mat-menu-item (click)="options('save')">Save record</button>
+        <button mat-menu-item (click)="options('reset')">Reset</button>
+      </mat-menu>
     </div>
   </div>
 
@@ -22,7 +30,7 @@
   </mat-form-field>
   
   <div id="option">
-    <button mat-icon-button [matMenuTriggerFor]="option">
+    <button mat-icon-button matTooltip="filter list" [matMenuTriggerFor]="option">
       <mat-icon>sort</mat-icon>
     </button>
 
@@ -33,7 +41,7 @@
       <button mat-menu-item (click)="displayData(3)">Hide transaction</button>
     </mat-menu>
   </div>
-
+  
   <div class="mat-elevation-z8" id="table">
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -103,4 +111,7 @@
 
     <mat-paginator [pageSizeOptions]="[11, 25, 100]" showFirstLastButtons></mat-paginator>
   </div>
+  
+  <mat-spinner mode="indeterminate" diameter="125" strokeWidth="10" *ngIf="!isLoaded"></mat-spinner>
+  
 </div>

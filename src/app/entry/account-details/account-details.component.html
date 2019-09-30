@@ -1,11 +1,81 @@
 <div class="wrap">
+
   <div id="header-button">
     <button mat-icon-button routerLink="/a">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    
-    <p>Name</p>
-    <p></p>
-    
   </div>
+  
+  <div id="content">
+    
+    <div class="details header">
+      <h3>Account Details</h3>
+      <mat-divider></mat-divider>
+    </div>
+
+    <div class="details image">
+      <img [src]="data?.firebase?.photoURL" alt="user-picture" width="285" (load)="imageLoaded()">
+      <br>
+      <div>
+        <div>
+          <button mat-icon-button matTooltip="Generate random image" color="accent" [disabled]="option.isImageLoading" (click)="generateAvatar()">
+            <mat-icon>cached</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Create kiosk account" color="accent" (click)="createKiosk()">
+            <mat-icon>perm_identity</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="List of kiosk accoutns" color="accent" (click)="listKioskAccount()"> 
+            <mat-icon>account_box</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="details account">
+      
+      <div class="box">
+        <p class="text label">First name</p>
+        <p class="text item">{{ data?.firstName }}</p>
+      </div>
+      <div class="box second">
+        <p class="text label">Last name</p>
+        <p class="text item">{{ data?.lastName }}</p>
+      </div>
+      
+      <div class="break"></div>
+      
+      <div class="box low">
+        <p class="text label">Display name</p>
+        <p class="text item">{{ data?.firebase.displayName }}</p>
+      </div>
+      
+      <div class="break"></div>
+      
+      <div class="box lower">
+        <p class="text label">Employee ID</p>
+        <p class="text item">{{ data?.employeeId }}</p>
+      </div>
+      <div class="box second lower">
+        <p class="text label">Employee email</p>
+        <p class="text item">{{ data?.firebase.email }}</p>
+      </div>
+      
+      <div class="break"></div>
+      
+      <div class="box lowest">
+        <p class="text label">Creation datetime</p>
+        <p class="text item">{{ data?.firebase.metadata._a }}</p>
+      </div>
+      
+      <div class="break"></div>
+      
+      <div class="box lowestest">
+        <p class="text label">Last login datetime</p>
+        <p class="text item">{{ data?.firebase.metadata._b }}</p>
+      </div>
+      
+    </div>
+
+  </div>
+  
 </div>

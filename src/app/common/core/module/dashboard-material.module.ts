@@ -14,6 +14,7 @@ import {
   MatRadioModule,
   MatDividerModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +33,7 @@ import {
     MatRadioModule,
     MatDividerModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class DashboardMaterialModule { }

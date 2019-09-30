@@ -1,63 +1,145 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { map } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 // import * as decodeFirebasePushID from '@jengjeng/firebase-pushid-convert-timestamp';
 // import * as Chance from 'chance';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 import * as _ from 'lodash';
 
+import { AuthService } from './auth.service';
 import { SharedService } from './shared.service';
 
 @Injectable({ providedIn: 'root' })
 export class DatabaseService {
 
-  productList: AngularFireList<any>;
-  posData: AngularFireList<any>;
-
+  productListCollection: AngularFireList<any>;
+  posDataCollection: AngularFireList<any>;
+  usersCollection: AngularFireList<any>;
 
   constructor(
     private db: AngularFireDatabase,
+    private auth: AuthService,
     private shared: SharedService
   ) {
-    this.productList = db.list<any>('product-list');
-    this.posData = db.list<any>('pos-data');
+    this.productListCollection = db.list<any>('product-list');
+    this.posDataCollection = db.list<any>('pos-data');
+    this.usersCollection = db.list<any>('users');
   }
   
-  // updateAllUID() {
-  //   this.productList.snapshotChanges().pipe(
-  //     map((value) => {
-  //       return value.map((db) => {
-  //         const oldData = db.payload.toJSON();
-  //         let data = db.payload.toJSON();
-  //
-  //         data['uid'] = db.key;
-  //         db.payload.ref.update(data).then(() => {
-  //           console.log(`old > ${oldData['uid']}`, `new > ${data['uid']}`);
-  //         })
-  //       })
-  //     })
-  //   ).subscribe(() => 0);
-  // }
-  
-  currentUser(uid: string) {
-    return this.db.list<any>('users').snapshotChanges().pipe(
-      map((cloud) => {
-        return cloud.map((data) => {
-          const ref = data.payload;
-          
-          if (ref.key === uid) {
-            
-          }
-          
+  get currentUser() {
+    
+    const firebaseData = this.auth.currentUser;
+    
+    return this.usersCollection.snapshotChanges().pipe(
+      switchMap((cloud: any[]) => {
+        return firebaseData.map((data: {}) => {
+          return cloud.map((item) => {
+            return { ...item.payload.toJSON(), firebase: data }
+          }).find(a => a['uid'] === data['uid'])
         })
+      }),
+      map((data) => {
+
+        delete data.user['email'];
+        delete data.user['password'];
+        delete data.user['repeatPassword'];
+        
+        const a = data.firebase.metadata['a'].slice(0, 10);
+        const b = data.firebase.metadata['b'].slice(0, 10);
+        
+        data.firebase.metadata['_a'] = moment.unix(a).format('MMM D, YYYY; h:mm A z');
+        data.firebase.metadata['_b'] = moment.unix(b).format('MMM D, YYYY; h:mm A z');
+        
+        return { ...data.user, firebase: data.firebase }
       })
     )
+  }
+  
+  readOnline() {
+    return this.db.list<any>('online').valueChanges();
+  }
+  
+  updateEmployeeID(id: string) {
+
+    const firebaseData = this.auth.currentUser;
+    
+    const obs = this.usersCollection.snapshotChanges().pipe(
+      switchMap((users) => {
+        
+        return firebaseData.map((data: {}) => {
+          return users.map((user) => {
+            
+            const uid = user.payload.toJSON()['uid'];
+            if (uid === data['uid']) {
+              
+              obs.unsubscribe();
+              const _user = user.payload.toJSON()['user'];
+              delete _user['employeeId'];
+
+              user.payload.ref.update({ user: { employeeId: id, ..._user } });
+            }
+          })
+        })
+      })
+    ).subscribe(() => 0);
+  }
+  
+  updateFirstName(name: string) {
+
+    const firebaseData = this.auth.currentUser;
+    
+    const obs = this.usersCollection.snapshotChanges().pipe(
+      switchMap((users) => {
+        
+        return firebaseData.map((data: {}) => {
+          return users.map((user) => {
+            
+            const uid = user.payload.toJSON()['uid'];
+            if (uid === data['uid']) {
+              
+              obs.unsubscribe();
+              const _user = user.payload.toJSON()['user'];
+              delete _user['firstName'];
+
+              this.auth.updateDisplayName(`${name} ${_user['lastName']}`);
+              user.payload.ref.update({ user: { firstName: name, ..._user } });
+            }
+          })
+        })
+      })
+    ).subscribe(() => 0);
+  }
+  
+  updateLastName(name: string) {
+
+    const firebaseData = this.auth.currentUser;
+    
+    const obs = this.usersCollection.snapshotChanges().pipe(
+      switchMap((users) => {
+        
+        return firebaseData.map((data: {}) => {
+          return users.map((user) => {
+            
+            const uid = user.payload.toJSON()['uid'];
+            if (uid === data['uid']) {
+              
+              obs.unsubscribe();
+              const _user = user.payload.toJSON()['user'];
+              delete _user['lastName'];
+
+              this.auth.updateDisplayName(`${_user['firstName']} ${name}`);
+              user.payload.ref.update({ user: { lastName: name, ..._user } });
+            }
+          })
+        })
+      })
+    ).subscribe(() => 0);
   }
   
   createNewUser(path: string, data: any) {
     return this.db.list<any>(path).push(data);
   }
-
+  
   addNewBeverage(path: string, beverage: any) {
     
     const obs = this.getList(0, path).pipe(
@@ -101,29 +183,23 @@ export class DatabaseService {
   }
 
   updateBeverage(path: string, uid: string, beverage: any, code: number) {
-    let count = 0;
     const obs = this.db.list<any>(path).snapshotChanges().pipe(
       map((values) => {
         return values.map((value) => {
 
-          if (count !== 0) return;
-
           if (value.key === uid) {
             
-            beverage['sellingPrice'] = Number(beverage['sellingPrice']).toFixed(2).toString()
-            value.payload.ref.update(beverage).then(() => {
-              this.shared.openSnack({
-                message: `Succssfully updated "${beverage['beverageName']}".`,
-                duration: 3500,
-                horizontal: 'center',
-                vertical: 'bottom'
-              })
-            });
-            
-            
-            
             obs.unsubscribe();
-            return count++;
+            
+            beverage['sellingPrice'] = Number(beverage['sellingPrice']).toFixed(2).toString()
+            value.payload.ref.update(beverage);
+            
+            this.shared.openSnack({
+              message: `Succssfully updated "${beverage['beverageName']}".`,
+              duration: 3500,
+              horizontal: 'center',
+              vertical: 'bottom'
+            })
           }
         })
       })
@@ -197,6 +273,10 @@ export class DatabaseService {
     });
   }
 
+  get kioskAccounts() {
+    return this.db.list<any>('users-kiosk').valueChanges()
+  }
+
   readProductList(path: string) {
     return this.db.list<any>(path).snapshotChanges().pipe(
       map((values) => {
@@ -209,6 +289,30 @@ export class DatabaseService {
 
         const beverageGroup = _.sortBy(array, [data => data['beverageGroup']]);;
         return _.sortBy(beverageGroup, [data => data['beverageName']]);
+      })
+    );
+  }
+  
+  readReportSummary() {
+    return this.db.list<any>('report-summary').snapshotChanges().pipe(
+      map((values) => {
+        
+        const array = values.map((value) => {
+          const uid = value.payload.key;
+          const data = value.payload.toJSON();
+          return { uid, ...data };
+        });
+        
+        const beverageGroup = _.sortBy(array, [data => data['beverageGroup']]);;
+        return _.sortBy(beverageGroup, [data => data['beverageName']]);
+      }),
+      map((data) => {
+        return data.map((doc) => {
+          const unix = doc['unix'];
+          doc['datetime'] = moment.unix(unix).format('M-D-YY / h:mm A');
+          // return _.sortBy(beverageGroup, [data => data['beverageName']]);
+          return doc
+        })
       })
     );
   }
@@ -253,7 +357,7 @@ export class DatabaseService {
   }
   
   removeAllTransaction() {
-    return this.db.list<any>('product-list').snapshotChanges().pipe(
+    const obs = this.db.list<any>('product-list').snapshotChanges().pipe(
       map((values) => {
         return values.map((value) => {
           const data = value.payload.toJSON();
@@ -261,8 +365,25 @@ export class DatabaseService {
           delete data['sold'];
           data['amount'] = 0;
           data['sold'] = 0;
+          obs.unsubscribe();
           value.payload.ref.update(data)
         });
+      })
+    ).subscribe(() => 0);
+  }
+  
+  saveAllTransaction() {
+    const obs = this.db.list<any>('product-list').snapshotChanges().pipe(
+      map((db) => {
+        return db.map((fire) => fire.payload.toJSON())
+      }),
+      map((doc: any) => {
+        const unix = moment().unix()
+        const id = this.shared.randomHash.slice(0, 8);
+        doc = doc.filter((item: any) => item.sold > 0)
+        doc = { doc, unix, id }
+        obs.unsubscribe();
+        this.pushThis(doc, 'report-summary');
       })
     ).subscribe(() => 0);
   }
@@ -283,13 +404,15 @@ export class DatabaseService {
         values.slice(0, 1).map((value) => {
           this.db.list('pos-data').remove();
           if (value.type !== 'child_added') return;
-
+          
           // let data = <any>value.payload.toJSON().toString().split('/');
           // data = { code: data[0], quantity: data[1], mode: data[2] }
 
           var data: any =  value.payload.toJSON();
           
-          const observable = this.db.list<any>('new-pl').snapshotChanges().pipe(
+          console.log(data);
+          
+          const observable = this.db.list<any>('product-list').snapshotChanges().pipe(
             map((_values) => {
               _values.map(_value => {
           
@@ -319,10 +442,12 @@ export class DatabaseService {
                   
                 } else if (parseInt(data.mode) === 2 || data.mode === 'VOID') {
           
-          
                   const toSold =  _quantity - parseInt(data.quantity);
                   const toAmount = _old - ( _amount * parseInt(data.quantity) );
-                  if (toSold < 0 || toAmount < 0) return;
+                  if (toSold < 0 || toAmount < 0) {
+                    observable.unsubscribe();
+                    return;
+                  }
           
                   if (_quantity < 0) return;
                   _value.payload.ref.update({
